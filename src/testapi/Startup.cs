@@ -26,7 +26,7 @@ namespace testapi
 
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
-            services.AddTransient<IPlayersSource, PlayersSourceJson>(s => 
+            services.AddTransient<IPlayersSource, PlayersSourceJson>(s =>
                 new PlayersSourceJson(Configuration["PlayersJsonFile"]));
         }
 
