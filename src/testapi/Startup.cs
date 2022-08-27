@@ -12,7 +12,6 @@ namespace testapi
 {
     public class Startup
     {
-        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,8 +27,7 @@ namespace testapi
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
             services.AddTransient<IPlayersSource, PlayersSourceJson>(s => 
-                new PlayersSourceJson(Configuration["PlayersJsonFile"])
-            );
+                new PlayersSourceJson(Configuration["PlayersJsonFile"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
