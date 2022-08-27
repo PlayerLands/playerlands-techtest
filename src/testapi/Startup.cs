@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using testapi.Controllers;
 using testapi.framework;
 using testapi.players;
+using Microsoft.AspNetCore.Hosting;
 
 namespace testapi
 {
@@ -25,7 +25,7 @@ namespace testapi
         {
             services.AddTransient<ILogger, Logger<PlayersController>>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(option => option.EnableEndpointRouting = false);
 
             services.AddTransient<IPlayersSource, PlayersSourceJson>(s => 
                 new PlayersSourceJson(Configuration["PlayersJsonFile"])
@@ -33,7 +33,7 @@ namespace testapi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
